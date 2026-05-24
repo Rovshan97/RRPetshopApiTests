@@ -208,6 +208,8 @@ tempCodeRunnerFile.py
 
 # PyPI configuration file
 .pypirc
+allure-results
+.idea
 
 # Marimo
 marimo/_static/
