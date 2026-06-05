@@ -1,11 +1,7 @@
-from typing import assert_type
-
 import allure
 import requests
 import pytest
 import jsonschema
-
-from schemas import inventory_schema
 from .schemas.inventory_schema import INVENTORY_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3"
