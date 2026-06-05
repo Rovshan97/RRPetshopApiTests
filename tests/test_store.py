@@ -3,6 +3,7 @@ import requests
 import pytest
 import jsonschema
 from tests.schemas.inventory_schema import INVENTORY_SCHEMA
+from tests.schemas.order_schema import ORDER_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3"
 
@@ -23,11 +24,12 @@ class TestStore:
         with allure.step("Отправка запроса на создание нового заказа"):
             response = requests.post(url=f"{BASE_URL}/store/order", json=payload)
 
-        with allure.step("Проверка статуса статуса ответа и текстового содержимого"):
+        with allure.step("Проверка статуса статуса ответа"):
             assert response.status_code == 200, "Код ответа не совпал с ожидаемым"
 
-        with allure.step("Проверка текстового содержимого ответа"):
+        with allure.step("Проверка текстового содержимого ответа и валидация JSON"):
             assert response.json() == payload, "Текстовое содержимое ответа не совпало с ожидаемым"
+            jsonschema.validate(response.json(), ORDER_SCHEMA)
 
 
     @allure.title("Получение информации о заказе по ID")
